@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+ROOT = File.join(File.dirname(__FILE__), '..')
+$LOAD_PATH << File.join(ROOT, 'lib')
+
+require 'blz'
+
+if ARGV.size != 2
+  STDERR.puts "usage: blz [exact|match|city] <input>"
+  exit 2
+end
+
+case ARGV.first
+when "exact"
+  results = BLZ::Bank.find_by_blz(ARGV[1], :exact => true)
+  if results && results.size > 0
+    results.each { |bank| STDOUT.puts bank }
+  end
+when "match"
+  results = BLZ::Bank.find_by_blz(ARGV[1])
+  if results && results.size > 0
+    results.each { |bank| STDOUT.puts bank }
+  end
+when "city"
+  results = BLZ::Bank.find_by_city(ARGV[1])
+  if results && results.size > 0
+    results.each { |bank| STDOUT.puts bank }
+  end
+else
+  STDERR.puts "usage: blz [exact|match|city] input"
+end
+
+
