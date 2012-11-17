@@ -31,10 +31,10 @@ module BLZ
       private
 
       def read_banks
-        filename = File.expand_path('data/blz.tsv')
         banks = []
+        filename = File.expand_path('data/blz.tsv')
         CSV.foreach(filename, col_sep: "\t") do |r|
-          banks << Bank.new(r[0], r[2], r[3], r[4], r[5], r[7])
+          banks << new(r[0], r[2], r[3], r[4], r[5], r[7])
         end
         banks
       end
