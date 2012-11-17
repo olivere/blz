@@ -54,7 +54,7 @@ module BLZ
 
     # Returns a nice representation of the bank.
     def to_s
-      [blz, name, "#{zip} #{city}", bic].reject(&:empty?).join(', ')
+      [blz, name, "#{zip} #{city}", bic].compact.reject(&:empty?).join(', ')
     end
   end
 end
