@@ -54,7 +54,7 @@ Now go and build your own BLZ gem ;-)
 
 ## Contributors
 
-* @max-power
+* [max-power](https://github.com/max-power)
 
 ## License
 
