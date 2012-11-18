@@ -52,6 +52,10 @@ from the German Bundesbank
 [here](http://www.bundesbank.de/Redaktion/DE/Standardartikel/Kerngeschaeftsfelder/Unbarer_Zahlungsverkehr/bankleitzahlen_download.html).
 Now go and build your own BLZ gem ;-)
 
+## Contributors
+
+* @max-power
+
 ## License
 
 Released under the MIT License. See the LICENSE file for further
