@@ -32,7 +32,7 @@ module BLZ
 
       def read_banks
         banks = []
-        filename = File.expand_path('data/blz.tsv')
+        filename = File.join(File.dirname(__FILE__), '..', '..', 'data', 'blz.tsv')
         CSV.foreach(filename, col_sep: "\t") do |r|
           banks << new(r[0], r[2], r[3], r[4], r[5], r[7])
         end
