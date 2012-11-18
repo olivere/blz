@@ -1,3 +1,8 @@
+# 0.1.2, released 2012-11-18
+
+* BLZ data file not correctly resolved when
+  using blz script
+
 # 0.1.1, released 2012-11-18
 
 * Fixes a bug with `nil` values (kudos to @max-power)
