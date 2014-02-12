@@ -4,3 +4,6 @@ TODO
 doc
 pkg
 *.gem
+*.lock
+
+.ruby-*
