@@ -21,7 +21,7 @@ EOF
   s.email           = 'oliver.eilhard@gmail.com'
   s.homepage        = 'http://github.com/olivere/blz'
 
-  s.files           = `git ls-files`.split("\n") - [".gitignore"]
+  s.files           = `git ls-files`.split("\n") - ['.gitignore']
   s.bindir          = 'bin'
   s.executables     << 'blz'
   s.require_path    = 'lib'
@@ -29,8 +29,8 @@ EOF
   s.extra_rdoc_files = extra_rdoc_files
   s.test_files      = []
 
-  s.add_development_dependency("bundler", "~> 1.2")
-  s.add_development_dependency("rdoc", "~> 2.5")
-  s.add_development_dependency("rake", ">= 0.9")
+  s.add_development_dependency 'bundler', '~> 1.2'
+  s.add_development_dependency 'rdoc',    '~> 2.5'
+  s.add_development_dependency 'rake',    '>= 0.9'
 end
 

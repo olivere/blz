@@ -11,15 +11,26 @@ class TestBank < Test::Unit::TestCase
     assert_equal "Stadtsparkasse München", sskm.name
   end
 
-  def test_search_by_exact_match
+  def test_search_by_exact_match_munich
     assert results = BLZ::Bank.find_by_blz("70150000", :exact => true)
-    assert_equal 1, results.size
-    assert_equal "70150000", results[0].blz
-    assert_equal "Stadtsparkasse München", results[0].name
-    assert_equal "St Spk München", results[0].short_name
-    assert_equal "80791", results[0].zip
-    assert_equal "München", results[0].city
-    assert_equal "SSKMDEMMXXX", results[0].bic
+    assert_equal 1,                         results.size
+    assert_equal "70150000",                results[0].blz
+    assert_equal "Stadtsparkasse München",  results[0].name
+    assert_equal "Stadtsparkasse München",  results[0].short_name
+    assert_equal "80791",                   results[0].zip
+    assert_equal "München",                 results[0].city
+    assert_equal "SSKMDEMMXXX",             results[0].bic
+  end
+
+  def test_search_by_exact_match_bremen
+    assert results = BLZ::Bank.find_by_blz("29050101", :exact => true)
+    assert_equal 2,                   results.size
+    assert_equal "29050101",          results[0].blz
+    assert_equal "Sparkasse Bremen",  results[0].name
+    assert_equal "Spk Bremen",        results[0].short_name
+    assert_equal "28078",             results[0].zip
+    assert_equal "Bremen",            results[0].city
+    assert_equal "SBREDE22XXX",       results[0].bic
   end
 
   def test_search_by_prefix
