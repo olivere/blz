@@ -38,13 +38,19 @@ class TestBank < Test::Unit::TestCase
     assert results.size > 1
     #assert_equal "Stadtsparkasse München", results[0].bezeichnung
   end
-  
+
   def test_search_by_city
     assert results = BLZ::Bank.find_by_city("München")
     assert results.size > 1
     assert results.find { |b| b.blz == "70150000" }
   end
-  
+
+  def test_search_by_bic
+    assert results = BLZ::Bank.find_by_bic("SSKMDEMMXXX")
+    assert results.size == 1
+    assert results.find { |b| b.blz == "70150000" }
+  end
+
   def test_to_s
     assert results = BLZ::Bank.find_by_blz("70150000", :exact_only => true)
     assert_equal 1, results.size

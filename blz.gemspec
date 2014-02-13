@@ -1,11 +1,10 @@
 # -*- encoding: utf-8 -*-
-#require File.expand_path('../lib/money', __FILE__)
 
 extra_rdoc_files = ['CHANGELOG.md', 'LICENSE', 'README.md']
 
 Gem::Specification.new do |s|
   s.name            = 'blz'
-  s.version         = '0.1.3'
+  s.version         = '0.1.4.20140608'
   s.platform        = Gem::Platform::RUBY
   s.summary         = "BLZ (Bankleitzahlen) for Ruby"
 
