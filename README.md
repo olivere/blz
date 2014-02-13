@@ -3,8 +3,8 @@
 ## Description
 
 BLZ or Bankleitzahlen is a bank identifier code system used by German
-and Austrian banks (see [Wikipedia](http://en.wikipedia.org/wiki/Bankleitzahl)). 
- 
+and Austrian banks (see [Wikipedia](http://en.wikipedia.org/wiki/Bankleitzahl)).
+
 This gem provides for searching and returning the information
 represented by the BLZ, such as the name of the bank etc.
 
@@ -17,7 +17,13 @@ represented by the BLZ, such as the name of the bank etc.
 I provided a command line tool to search for BLZ:
 
     blz exact 70150000
-    
+
+    70150000, Stadtsparkasse München, 80791 München, SSKMDEMMXXX
+
+Or search for BIC matches:
+
+    blz bic SSKMDE
+
     70150000, Stadtsparkasse München, 80791 München, SSKMDEMMXXX
 
 Or use substring matches:
@@ -48,12 +54,16 @@ Or find by city (rather uncommon, but useful):
 ## Downloads
 
 You can download the current list of BLZ (free of charge)
-from the German Bundesbank
-[here](http://www.bundesbank.de/Redaktion/DE/Standardartikel/Kerngeschaeftsfelder/Unbarer_Zahlungsverkehr/bankleitzahlen_download.html).
+[from the German Bundesbank](http://www.bundesbank.de/Redaktion/DE/Standardartikel/Kerngeschaeftsfelder/Unbarer_Zahlungsverkehr/bankleitzahlen_download.html).
+
+The Bundesbank releases a new list every three months. The last part of the
+version number of this gem mirrors the last date the provided data is valid.
+
 Now go and build your own BLZ gem ;-)
 
 ## Contributors
 
+* [dmke](https://github.com/dmke)
 * [max-power](https://github.com/max-power)
 
 ## License

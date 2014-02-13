@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'csv'
+require 'zlib'
 
 module BLZ
   class Bank
@@ -23,29 +24,41 @@ module BLZ
         end
       end
 
+      # Returns an array of all Banks specified by +bic+ (Business Identifier Code).
+      # The following options apply:
+      #    exact:: Only return exact matches (false by default)
+      #
+      def find_by_bic(bic, options = {})
+        exact = options.fetch(:exact, false)
+        all.select do |bank|
+          bank.bic == bic || (!exact && (bank.bic || '').start_with?(bic))
+        end
+      end
+
       # Returns an array of all banks.
       def all
         @banks ||= read_banks
       end
-      
+
       private
 
       def read_banks
         banks = []
-        filename = File.join(File.dirname(__FILE__), '..', '..', 'data', 'blz.tsv')
-        CSV.foreach(filename, col_sep: "\t") do |r|
-          banks << new(r[0], r[2], r[3], r[4], r[5], r[7])
+        Zlib::GzipReader.open(BLZ::DATA_FILE) do |gz|
+          CSV.new(gz, col_sep: "\t").each do |r|
+            banks << new(r[0], r[2], r[3], r[4], r[5], r[7])
+          end
         end
         banks
       end
     end
-    
+
     attr_reader :blz, :name, :zip, :city, :short_name, :bic
 
     # Initializes a single Bank record.
     def initialize(blz, name, zip, city, short_name, bic)
       @blz  = blz
-      @name = name 
+      @name = name
       @zip  = zip
       @city = city
       @bic  = bic

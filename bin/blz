@@ -25,8 +25,13 @@ when "city"
   if results && results.size > 0
     results.each { |bank| STDOUT.puts bank }
   end
+when "bic"
+  results = BLZ::Bank.find_by_bic(ARGV[1])
+  if results && results.size > 0
+    results.each { |bank| STDOUT.puts bank }
+  end
 else
-  STDERR.puts "usage: blz [exact|match|city] input"
+  STDERR.puts "usage: blz [exact|match|city|bic] input"
 end
 
 
