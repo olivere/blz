@@ -19,6 +19,7 @@ EOF
   s.author          = 'Oliver Eilhard'
   s.email           = 'oliver.eilhard@gmail.com'
   s.homepage        = 'http://github.com/olivere/blz'
+  s.license         = 'MIT'
 
   s.files           = `git ls-files`.split("\n") - ['.gitignore']
   s.bindir          = 'bin'
@@ -29,7 +30,7 @@ EOF
   s.test_files      = []
 
   s.add_development_dependency 'bundler', '~> 1.2'
-  s.add_development_dependency 'rdoc',    '~> 2.5.3'
-  s.add_development_dependency 'rake',    '~> 10.3.2'
+  s.add_development_dependency 'rdoc',    '~> 2.5',  '>= 2.5.3'
+  s.add_development_dependency 'rake',    '~> 10.3', '>= 10.3.2'
 end
 
