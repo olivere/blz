@@ -9,21 +9,23 @@
 
 module BLZ
   DATA_FILE = begin
-    now = Time.now
+    now  = Time.now
+    glob = Dir[ File.join(File.dirname(__FILE__), '../data/*.tsv.gz') ].sort
 
-    filename = if now <= Time.new(2013, 12, 9)
-      warn '[BLZ] The data provided may not be accurate.'
-      '2012_06_04.tsv.gz'
-    elsif Time.new(2013, 12, 9) < now && now <= Time.new(2014, 3, 2)
-      '2013_12_09.tsv.gz'
-    elsif Time.new(2014, 3, 2) < now && now <= Time.new(2014, 6, 8)
-      '2014_03_03.tsv.gz'
-    else
-      warn '[BLZ] The data provided may not be accurate.'
-      '2014_03_03.tsv.gz'
+    file2time = proc do |f|
+      match = f.match /(?<y>\d{4})_(?<m>\d\d)_(?<d>\d\d)\.tsv\.gz$/
+      Time.new match[:y], match[:m], match[:d]
     end
 
-    File.join(File.dirname(__FILE__), '../data', filename)
+    filename = glob.find {|c| now <= file2time[c] } || glob.last
+
+    # sanity check
+    t = file2time[filename]
+    if t < Time.new(2013, 12, 9) || now > t + (90 * 24 * 60 * 60)
+      warn '[BLZ] The data provided may not be accurate.'
+    end
+
+    filename
   end
 end
 
