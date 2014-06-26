@@ -29,7 +29,7 @@ EOF
   s.test_files      = []
 
   s.add_development_dependency 'bundler', '~> 1.2'
-  s.add_development_dependency 'rdoc',    '~> 2.5'
-  s.add_development_dependency 'rake',    '>= 0.9'
+  s.add_development_dependency 'rdoc',    '~> 2.5.3'
+  s.add_development_dependency 'rake',    '~> 10.3.2'
 end
 
