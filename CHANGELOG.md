@@ -1,4 +1,4 @@
-# 0.1.4.20140907a, unreleased
+# 0.1.4.20140907a, released 2014-07-11
 
 * apply update BIC of Sberbank (SEZBDEF1XXX → SEZDDEF1XXX)
   after Bundesbank ExtraNet notifcation from 2014-07-10
