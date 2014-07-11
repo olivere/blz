@@ -1,3 +1,8 @@
+# 0.1.4.20140907a, released 2014-07-11
+
+* apply update BIC of Sberbank (SEZBDEF1XXX → SEZDDEF1XXX)
+  after Bundesbank ExtraNet notifcation from 2014-07-10
+
 # 0.1.4.20140907, released 2014-06-26
 
 * BLZ data file for cycle 2014-06-09 to 2014-09-07 added
