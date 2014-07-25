@@ -1,4 +1,8 @@
-# 0.1.4.20140907a, released 2014-07-11
+# 0.1.4.20140907.2, released 2014-07-25
+
+* finders return an empty array when given `nil` or a blank string
+
+# 0.1.4.20140907.1, released 2014-07-11
 
 * apply update BIC of Sberbank (SEZBDEF1XXX → SEZDDEF1XXX)
   after Bundesbank ExtraNet notifcation from 2014-07-10
