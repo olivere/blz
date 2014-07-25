@@ -51,6 +51,16 @@ class TestBank < Test::Unit::TestCase
     assert results.find { |b| b.blz == "70150000" }
   end
 
+  def test_search_by_empty_bic
+    assert results = BLZ::Bank.find_by_bic('')
+    assert results.size == 0
+  end
+
+  def test_search_by_nil_bic
+    assert results = BLZ::Bank.find_by_bic(nil)
+    assert results.size == 0
+  end
+
   def test_to_s
     assert results = BLZ::Bank.find_by_blz("70150000", :exact_only => true)
     assert_equal 1, results.size

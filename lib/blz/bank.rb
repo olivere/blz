@@ -11,6 +11,8 @@ module BLZ
       #    exact:: Only return exact matches (false by default)
       #
       def find_by_blz(code, options = {})
+        return [] if blank?(code)
+
         exact = options.fetch(:exact, false)
         all.select do |bank|
           bank.blz == code || (!exact && bank.blz.start_with?(code))
@@ -19,6 +21,8 @@ module BLZ
 
       # Returns an array of all Banks with a substring of +city+.
       def find_by_city(substring)
+        return [] if blank?(substring)
+
         all.select do |bank|
           bank.city.index(substring)
         end
@@ -29,6 +33,8 @@ module BLZ
       #    exact:: Only return exact matches (false by default)
       #
       def find_by_bic(bic, options = {})
+        return [] if blank?(bic)
+
         exact = options.fetch(:exact, false)
         all.select do |bank|
           bank.bic == bic || (!exact && (bank.bic || '').start_with?(bic))
@@ -51,6 +57,18 @@ module BLZ
         end
         banks
       end
+
+      # Checks whether an object is blank (empty Array/Hash/String).
+      #
+      # Does not rely on ActiveSupport, but prefers that implementation.
+      def blank?(obj)
+        return true       if obj.nil?
+        return obj.blank? if obj.respond_to?(:blank?)
+        obj = obj.strip   if String === obj
+        return obj.empty? if obj.respond_to?(:empty?)
+
+        false
+      end
     end
 
     attr_reader :blz, :name, :zip, :city, :short_name, :bic
@@ -69,5 +87,6 @@ module BLZ
     def to_s
       [blz, name, "#{zip} #{city}", bic].compact.reject(&:empty?).join(', ')
     end
+
   end
 end
