@@ -8,6 +8,8 @@
 # a bank identifier code system used by German and Austrian banks.
 
 module BLZ
+  # TODO (dmke 2014/09/08): Extract data files into a blz-data gem and
+  #     move finder logic over there
   DATA_FILE = begin
     now  = Time.now
     glob = Dir[ File.join(File.dirname(__FILE__), '../data/*.tsv.gz') ].sort

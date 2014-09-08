@@ -1,3 +1,9 @@
+# 0.1.4.20141207, released 2014-09-08
+
+* pinned data to last update cycle (there were no changes)
+  This only gets rid of the "[BLZ] The data provided may not be accurate."
+  warning.
+
 # 0.1.4.20140907.2, released 2014-07-25
 
 * finders return an empty array when given `nil` or a blank string
