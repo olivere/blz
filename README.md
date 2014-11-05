@@ -61,6 +61,31 @@ version number of this gem mirrors the last date the provided data is valid.
 
 Now go and build your own BLZ gem ;-)
 
+### Note on converting
+
+One of the easiest ways to contribute is by updating the `data/*.tsv.gz`
+files. Currently, this is a 3-monthly manual process of:
+
+1. Downloading the file linked above (it helps to be subscribed to the
+  Bundesbank ExtraNet INTBA mailing list to get notifications, but the
+  [registration process](https://extranet.bundesbank.de/bsvpub/)
+  is a bit cumbersome...).
+
+2. Converting the `BLZ_yyyymmdd.xlsx` file into a tab seperated format
+  (plain old CSV format with `\t` as field seperator; omit the header).
+  Save it as `data/yyyy_mm_dd.tsv`
+
+3. Gzip'ing the `.tsv` file (i.e. `gzip -9 yyyy_mm_dd.tsv`, resulting
+  in `data/yyyy_mm_dd.tsv.gz`).
+
+4. Modify the `test_current_data_file` method in `test/test_bank.rb` to
+  reflect the latest file.
+
+5. Run the tests (`rake`).
+
+Obviously, this process tends to be error prone. A pull request with a
+Rake task completing these steps would be nice to have.
+
 ## Contributors
 
 * [dmke](https://github.com/dmke)
