@@ -6,7 +6,7 @@ require 'test/unit'
 class TestBank < Test::Unit::TestCase
 
   def test_current_data_file
-    assert_equal "2014_12_08.tsv.gz", File.basename(BLZ::DATA_FILE)
+    assert_equal "2015_03_09.tsv.gz", File.basename(BLZ::DATA_FILE)
   end
 
   def test_all_banks
@@ -72,4 +72,3 @@ class TestBank < Test::Unit::TestCase
   end
 
 end
-
