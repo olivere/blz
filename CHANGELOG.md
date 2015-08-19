@@ -1,3 +1,7 @@
+# 0.1.4.20151206, unreleased
+
+* BLZ data file for cycle 2015-09-07 to 2015-12-06 added
+
 # 0.1.4.20141207, released 2014-09-08
 
 * pinned data to last update cycle (there were no changes)
