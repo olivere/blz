@@ -7,28 +7,29 @@
 # Provides information about "Bankleitzahlen" (BLZ),
 # a bank identifier code system used by German and Austrian banks.
 
+require "date"
+
 module BLZ
-  # TODO (dmke 2014/09/08): Extract data files into a blz-data gem and
-  #     move finder logic over there
-  DATA_FILE = begin
-    now  = Time.now
+  def self.find_data_file(now=Date.today)
     glob = Dir[ File.join(File.dirname(__FILE__), '../data/*.tsv.gz') ].sort
 
     file2time = proc do |f|
       match = f.match /(?<y>\d{4})_(?<m>\d\d)_(?<d>\d\d)\.tsv\.gz$/
-      Time.new match[:y], match[:m], match[:d]
+      Date.new match[:y].to_i, match[:m].to_i, match[:d].to_i
     end
 
     filename = glob.find {|c| now <= file2time[c] } || glob.last
 
     # sanity check
     t = file2time[filename]
-    if t < Time.new(2013, 12, 9) || now > t + (90 * 24 * 60 * 60)
+    if t < Date.new(2013, 12, 9) || now > t + 90
       warn '[BLZ] The data provided may not be accurate.'
     end
 
     filename
   end
+
+  DATA_FILE = find_data_file
 end
 
 require 'blz/bank'

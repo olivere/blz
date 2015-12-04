@@ -5,8 +5,27 @@ require 'test/unit'
 
 class TestBank < Test::Unit::TestCase
 
+  def test_data_file_finder
+    {
+      Date.new(2000,1,1)  => "2015_03_09.tsv.gz",
+      Date.new(2015,1,1)  => "2015_03_09.tsv.gz",
+      Date.new(2015,3,9)  => "2015_03_09.tsv.gz",
+
+      Date.new(2015,3,10) => "2015_12_06.tsv.gz",
+      Date.new(2015,6,25) => "2015_12_06.tsv.gz",
+      Date.new(2015,12,6) => "2015_12_06.tsv.gz",
+
+      Date.new(2015,12,7) => "2016_03_06.tsv.gz",
+      Date.new(2016,3,6)  => "2016_03_06.tsv.gz",
+      Date.new(2016,3,7)  => "2016_03_06.tsv.gz", # ! until next release cycle
+    }.each do |date, filename|
+      file = BLZ.find_data_file(date)
+      assert_equal filename, File.basename(file)
+    end
+  end
+
   def test_current_data_file
-    assert_equal "2015_12_06.tsv.gz", File.basename(BLZ::DATA_FILE)
+    assert_match /\A\d{4}_\d\d_\d\d\.tsv\.gz\z/, File.basename(BLZ::DATA_FILE)
   end
 
   def test_all_banks

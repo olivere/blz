@@ -2,6 +2,7 @@
 
 * BLZ data file for cycle 2015-12-07 to 2016-03-06 added
 * removed data files for 2012-2014
+* refactored data file finder logic
 
 # 0.1.4.20151206, released 2015-08-19
 
