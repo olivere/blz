@@ -4,7 +4,7 @@ extra_rdoc_files = ['CHANGELOG.md', 'LICENSE', 'README.md']
 
 Gem::Specification.new do |s|
   s.name            = 'blz'
-  s.version         = '0.1.4.20151206'
+  s.version         = '0.1.4.20160306'
   s.platform        = Gem::Platform::RUBY
   s.summary         = "BLZ (Bankleitzahlen) for Ruby"
 
@@ -16,8 +16,8 @@ and Austria.
 http://github.com/olivere/blz
 EOF
 
-  s.author          = 'Oliver Eilhard'
-  s.email           = 'oliver.eilhard@gmail.com'
+  s.author          = ['Oliver Eilhard', 'Dominik Menke']
+  s.email           = ['oliver.eilhard@gmail.com', 'dominik.menke@gmail.com']
   s.homepage        = 'http://github.com/olivere/blz'
   s.license         = 'MIT'
 
