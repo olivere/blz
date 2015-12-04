@@ -1,6 +1,14 @@
-# 0.1.4.20151206, unreleased
+# 0.1.4.20160306, unreleased
+
+* BLZ data file for cycle 2015-12-07 to 2016-03-06 added
+
+# 0.1.4.20151206, released 2015-08-19
 
 * BLZ data file for cycle 2015-09-07 to 2015-12-06 added
+
+# 0.1.4.20150607, released 2015-03-09
+
+* BLZ data file for cycle 2015-06-09 to 2015-09-07 added
 
 # 0.1.4.20141207, released 2014-09-08
 
@@ -47,4 +55,3 @@
 # 0.1.0, released 2012-09-27
 
 * Initial version released on GitHub
-
