@@ -1,4 +1,8 @@
-# 0.1.4.20160306, unreleased
+# 0.1.4.20160904, unreleased
+
+* BLZ data file for cycle 2016-03-06 to 2016-09-04 added
+
+# 0.1.4.20160306, released 2015-12-04
 
 * BLZ data file for cycle 2015-12-07 to 2016-03-06 added
 * removed data files for 2012-2014
