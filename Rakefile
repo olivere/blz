@@ -1,6 +1,7 @@
 # Rakefile for BLZ. -*-ruby-*
 require 'rake/task'
 require 'rake/testtask'
+require 'bundler/gem_tasks'
 
 Rake::TestTask.new do |t|
   t.test_files = FileList['test/test*.rb']
