@@ -18,7 +18,7 @@ class TestBank < Test::Unit::TestCase
       Date.new(2015,12,7) => "2016_03_06.tsv.gz",
       Date.new(2016,3,6)  => "2016_03_06.tsv.gz",
       Date.new(2016,3,7)  => "2016_09_04.tsv.gz",
-      Date.new(2016,9,5)  => "2016_09_04.tsv.gz", # ! until next release cycle
+      Date.new(2017,6,5)  => "2017_03_06.tsv.gz", # ! until next release cycle
     }.each do |date, filename|
       file = BLZ.find_data_file(date)
       assert_equal filename, File.basename(file)

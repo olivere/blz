@@ -1,3 +1,8 @@
+# 0.1.4.20170306, released 2017-02-06
+
+* BLZ data file for cycle 2017-03-06 to 2017-06-04 added
+* data for 2016-09-04 until 2017-03-06 is unavailable, sorry
+
 # 0.1.4.20160904, released 2016-05-15
 
 * BLZ data file for cycle 2016-03-06 to 2016-09-04 added
