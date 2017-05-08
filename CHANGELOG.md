@@ -1,3 +1,9 @@
+# 0.2.0.20170605, released 2017-05-08
+
+* BLZ data file for cycle 2017-06-04 to 2017-09-03 added
+* BLZ data files for 2015 removed
+* revamped tests, so that manual editing becomes unnecessary
+
 # 0.1.4.20170306, released 2017-02-06
 
 * BLZ data file for cycle 2017-03-06 to 2017-06-04 added
