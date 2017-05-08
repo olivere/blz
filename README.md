@@ -78,10 +78,7 @@ files. Currently, this is a 3-monthly manual process of:
 3. Gzip'ing the `.tsv` file (i.e. `gzip -9 yyyy_mm_dd.tsv`, resulting
   in `data/yyyy_mm_dd.tsv.gz`).
 
-4. Modify the `test_current_data_file` method in `test/test_bank.rb` to
-  reflect the latest file.
-
-5. Run the tests (`rake`).
+4. Run the tests (`rake`).
 
 Obviously, this process tends to be error prone. A pull request with a
 Rake task completing these steps would be nice to have.

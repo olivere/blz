@@ -2,26 +2,36 @@
 
 require 'blz'
 require 'test/unit'
+require 'stringio'
 
 class TestBank < Test::Unit::TestCase
+  DATA_FILES = Dir[File.join(File.dirname(__FILE__), '../data/*.tsv.gz')].sort
 
-  def test_data_file_finder
-    {
-      Date.new(2000,1,1)  => "2015_03_09.tsv.gz",
-      Date.new(2015,1,1)  => "2015_03_09.tsv.gz",
-      Date.new(2015,3,9)  => "2015_03_09.tsv.gz",
+  DATA_FILES.each do |filename|
+    define_method "test_find_file_for_#{File.basename(filename)[0..-8]}" do
+      assert_stderr_no_match "The data provided may not be accurate" do
+        date = BLZ.convert_file_to_date(filename)
+        file = BLZ.find_data_file(date)
+        assert_equal b(filename), b(file)
+      end
+    end
+  end
 
-      Date.new(2015,3,10) => "2015_12_06.tsv.gz",
-      Date.new(2015,6,25) => "2015_12_06.tsv.gz",
-      Date.new(2015,12,6) => "2015_12_06.tsv.gz",
+  def test_find_file_for_past_date
+    assert_stderr_match "The data provided may not be accurate" do
+      file  = DATA_FILES.first
+      date  = BLZ.convert_file_to_date(file) - 1
+      found = BLZ.find_data_file(date)
+      assert_equal b(file), b(found)
+    end
+  end
 
-      Date.new(2015,12,7) => "2016_03_06.tsv.gz",
-      Date.new(2016,3,6)  => "2016_03_06.tsv.gz",
-      Date.new(2016,3,7)  => "2016_09_04.tsv.gz",
-      Date.new(2017,6,5)  => "2017_03_06.tsv.gz", # ! until next release cycle
-    }.each do |date, filename|
-      file = BLZ.find_data_file(date)
-      assert_equal filename, File.basename(file)
+  def test_find_file_for_future_date
+    assert_stderr_match "The data provided may not be accurate" do
+      file  = DATA_FILES.last
+      date  = BLZ.convert_file_to_date(file) + 91
+      found = BLZ.find_data_file(date)
+      assert_equal b(file), b(found)
     end
   end
 
@@ -91,4 +101,29 @@ class TestBank < Test::Unit::TestCase
     assert_equal "70150000, Stadtsparkasse München, 80791 München, SSKMDEMMXXX", results[0].to_s
   end
 
+  # helper
+
+  def assert_stderr_match(msg, &block)
+    serr = redirect_stderr(&block)
+    assert_match msg, serr
+  end
+
+  def assert_stderr_no_match(msg, &block)
+    msg = Regexp.new(Regexp.escape(msg)) unless msg.is_a?(Regexp)
+    serr = redirect_stderr(&block)
+    assert_no_match msg, serr
+  end
+
+  def b(file)
+    File.basename file
+  end
+
+  def redirect_stderr
+    fake_stderr = StringIO.new
+    original_stderr, $stderr = $stderr, fake_stderr
+    yield
+    fake_stderr.string
+  ensure
+    $stderr = original_stderr
+  end
 end
