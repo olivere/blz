@@ -36,7 +36,8 @@ class TestBank < Test::Unit::TestCase
   end
 
   def test_current_data_file
-    assert_match /\A\d{4}_\d\d_\d\d\.tsv\.gz\z/, File.basename(BLZ::DATA_FILE)
+    re = /\A\d{4}_\d\d_\d\d\.tsv\.gz\z/
+    assert_match re, File.basename(BLZ::DATA_FILE)
   end
 
   def test_all_banks

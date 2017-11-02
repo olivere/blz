@@ -11,7 +11,7 @@ require "date"
 
 module BLZ
   def self.convert_file_to_date(f)
-    match = f.match /(?<y>\d{4})_(?<m>\d\d)_(?<d>\d\d)\.tsv\.gz$/
+    match = f.match(/(?<y>\d{4})_(?<m>\d\d)_(?<d>\d\d)\.tsv\.gz$/)
     Date.new match[:y].to_i, match[:m].to_i, match[:d].to_i
   end
 
