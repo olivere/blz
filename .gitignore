@@ -8,3 +8,7 @@ pkg
 *.xlsx
 
 .ruby-*
+
+scripts/source.txt
+scripts/target.tsv*
+scripts/compiled.tsv*
