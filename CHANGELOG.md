@@ -1,7 +1,10 @@
+# 0.2.0.20180604, released 2018-05-04
+
+* BLZ data file for cycle 2018-06-04 to 2018-08-02 added
+
 # 0.2.0.20180305, released 2018-03-16
 
 * BLZ data file for cycle 2018-03-05 to 2018-06-03 added
-
 
 # 0.2.0.20171204, released 2017-05-08
 
