@@ -1,3 +1,8 @@
+# 0.2.0.20180903, released 2018-10-16
+
+* BLZ data file updated
+* small bugfix in automation scripts (does not affect BLZ library)
+
 # 0.2.0.20180604, released 2018-05-04
 
 * BLZ data file for cycle 2018-06-04 to 2018-08-02 added

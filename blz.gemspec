@@ -4,7 +4,7 @@ extra_rdoc_files = ['CHANGELOG.md', 'LICENSE', 'README.md']
 
 Gem::Specification.new do |s|
   s.name            = 'blz'
-  s.version         = '0.2.0.20180604'
+  s.version         = '0.2.0.20180903'
   s.platform        = Gem::Platform::RUBY
   s.summary         = "BLZ (Bankleitzahlen) for Ruby"
 
