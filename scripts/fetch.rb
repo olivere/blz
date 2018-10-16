@@ -64,7 +64,7 @@ begin
   blz = agent.get(target_link.href)
 
   name_match = name.match(/BLZ_(?<y>\d{4})(?<m>\d\d)(?<d>\d\d)\.txt$/)
-  target_name = format("../data/%4d_%02d_%02d.tsv.gz", name_match[:y], name_match[:m], name_match[:d])
+  target_name = format("../data/%4d_%02d_%02d.tsv.gz", name_match[:y].to_i, name_match[:m].to_i, name_match[:d].to_i)
   target_file = File.expand_path(target_name, __dir__)
 
   logger.info("reformatting, saving as #{target_file}")
