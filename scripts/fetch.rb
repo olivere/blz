@@ -54,7 +54,7 @@ begin
   end
 
   name = target_link.text.strip
-  if name == format("BLZ_%4d%02d%02d.txt", last_match[:y], last_match[:m], last_match[:d])
+  if name == format("BLZ_%4d%02d%02d.txt", last_match[:y].to_i, last_match[:m].to_i, last_match[:d].to_i)
     logger.info("no matching link found")
     exit 0
   end
