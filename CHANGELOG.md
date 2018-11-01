@@ -1,3 +1,8 @@
+# 0.2.0.20181203, released 2018-11-01
+
+* BLZ data file updated
+* continued to fix automation scripts (again, does not affect library code)
+
 # 0.2.0.20180903, released 2018-10-16
 
 * BLZ data file updated
