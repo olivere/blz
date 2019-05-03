@@ -3,6 +3,7 @@
 require "mechanize"
 require "logger"
 require "zlib"
+require "zip"
 
 if (f = File.expand_path("~/.extranet")) && File.exist?(f)
   username, password = File.read(f).strip.split(":", 2)
@@ -44,9 +45,10 @@ begin
   sleep 1
   page = agent.get NAVIGATION[:table]
 
-  target_link = page.links.find do |link|
-    !!(link.text.strip =~ /BLZ_\d{8}.txt/)
-  end
+  target_link = page.links
+    .select  {|link| !!(link.text.strip =~ /BLZ_\d{8}.zip/) }
+    .sort_by {|link| link.text.strip }
+    .last
 
   if !target_link
     logger.info("no new download found")
@@ -54,7 +56,7 @@ begin
   end
 
   name = target_link.text.strip
-  if name == format("BLZ_%4d%02d%02d.txt", last_match[:y].to_i, last_match[:m].to_i, last_match[:d].to_i)
+  if name == format("BLZ_%4d%02d%02d.zip", last_match[:y].to_i, last_match[:m].to_i, last_match[:d].to_i)
     logger.info("no matching link found")
     exit 0
   end
@@ -63,21 +65,29 @@ begin
   sleep 1
   blz = agent.get(target_link.href)
 
-  name_match = name.match(/BLZ_(?<y>\d{4})(?<m>\d\d)(?<d>\d\d)\.txt$/)
+  name_match = name.match(/BLZ_(?<y>\d{4})(?<m>\d\d)(?<d>\d\d)\.zip$/)
   target_name = format("../data/%4d_%02d_%02d.tsv.gz", name_match[:y].to_i, name_match[:m].to_i, name_match[:d].to_i)
   target_file = File.expand_path(target_name, __dir__)
 
-  logger.info("reformatting, saving as #{target_file}")
-  Zlib::GzipWriter.open(target_file, Zlib::BEST_COMPRESSION) do |gz|
-    while line = blz.body_io.gets
-      line = line.encode(Encoding::UTF_8, Encoding::ISO_8859_15).chomp!
-      if line.length != METRIC_LEN
-        logger.error("expected line length #{METRIC_LEN}, got #{line.length} in '#{line}'")
-        next
-      end
+  logger.info("extracting ZIP file")
+  Zip::File.open_buffer(blz.body).each do |entry|
+    next unless entry.name == "BLZ.txt"
+    logger.info("found BLZ data")
 
-      i = 0
-      gz.puts METRIC.inject([]) {|s, m| s << line[i ... (i+=m)].strip }.join("\t")
+    entry.get_input_stream do |stream|
+      logger.info("reformatting, saving as #{target_file}")
+      Zlib::GzipWriter.open(target_file, Zlib::BEST_COMPRESSION) do |gz|
+        while line = stream.gets
+          line = line.encode(Encoding::UTF_8, Encoding::ISO_8859_15).chomp!
+          if line.length != METRIC_LEN
+            logger.error("expected line length #{METRIC_LEN}, got #{line.length} in '#{line}'")
+            next
+          end
+
+          i = 0
+          gz.puts METRIC.inject([]) {|s, m| s << line[i ... (i+=m)].strip }.join("\t")
+        end
+      end
     end
   end
 
