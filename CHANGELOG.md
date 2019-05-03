@@ -1,3 +1,8 @@
+# 0.2.0.20190603, releases 2019-05-03
+
+* BLZ data file updated
+* the previous cycle (20190304) did not contain updates
+
 # 0.2.0.20181203, released 2018-11-01
 
 * BLZ data file updated
